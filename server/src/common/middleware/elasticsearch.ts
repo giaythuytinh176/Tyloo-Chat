@@ -5,9 +5,9 @@
  * @Date: 2020-11-19 14:16:37
  */
 
-const axios = require('axios')
+const axios = require('axios');
 
-const base = 'http://localhost:9200/robot/_doc/_search'
+const base = 'http://localhost:9200/robot/_doc/_search';
 
 export const getElasticData = (query: string): Promise<any> =>
   axios.get(base, {
@@ -15,10 +15,10 @@ export const getElasticData = (query: string): Promise<any> =>
       source: JSON.stringify({
         query: {
           match: {
-            title: query
-          }
-        }
+            title: query,
+          },
+        },
       }),
-      source_content_type: 'application/json'
-    }
-  })
+      source_content_type: 'application/json',
+    },
+  });

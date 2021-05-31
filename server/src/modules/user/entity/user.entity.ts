@@ -1,28 +1,28 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  userId: string
+  userId: string;
 
   @Column({ default: 'test' })
-  username: string
+  username: string;
 
   @Column({ default: '123456', select: false })
-  password: string
+  password: string;
 
   @Column({ default: 'avatar1.png' })
-  avatar: string
+  avatar: string;
 
   @Column({ default: 'user' })
-  role: string
+  role: string;
 
   @Column({ default: 'on' })
-  status: string
+  status: string;
 
   @Column({ default: '' })
-  tag: string
+  tag: string;
 
   @Column({ type: 'double', default: new Date().valueOf() })
-  createTime: number
+  createTime: number;
 }

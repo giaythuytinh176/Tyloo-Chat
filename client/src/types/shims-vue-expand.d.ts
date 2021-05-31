@@ -7,7 +7,7 @@ import * as lodash from 'lodash';
 declare module 'vue/types/vue' {
   interface Vue {
     $router: VueRouter;
-    $localforage: any
+    $localforage: any;
     $route: Route;
     $store: Store<any>;
     $lodash: typeof lodash;
