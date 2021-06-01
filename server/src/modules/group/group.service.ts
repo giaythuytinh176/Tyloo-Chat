@@ -14,7 +14,7 @@ export class GroupService {
     private readonly groupRepository: Repository<Group>,
     @InjectRepository(GroupMap)
     private readonly groupUserRepository: Repository<GroupMap>,
-  ) {}
+  ) { }
 
   async postGroups(groupIds: string) {
     try {
@@ -103,11 +103,11 @@ export class GroupService {
       await this.groupRepository.update(group.groupId, group);
       return {
         code: RCode.OK,
-        msg: '修改成功',
+        msg: 'Successfully modified',
         data: group,
       };
     } catch (e) {
-      return { code: RCode.ERROR, msg: '更新失败', data: null };
+      return { code: RCode.ERROR, msg: 'Update failed', data: null };
     }
   }
 }

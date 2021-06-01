@@ -6,7 +6,7 @@
 -->
 <template>
   <a-collapse>
-    <a-collapse-panel key="contact" header="联系人" v-if="visibleList.contact">
+    <a-collapse-panel key="contact" header="Contact person" v-if="visibleList.contact">
       <div class="contact-container">
         <div class="contact-list" v-for="(value, key, index) in contactList" :key="index">
           <span class="contact-letter">{{ key }}</span>
@@ -23,7 +23,7 @@
         <a-tree show-line :replace-fields="replaceFields" :tree-data="organizationArr" @select="onTreeSelect" />
       </div>
     </a-collapse-panel>
-    <a-collapse-panel key="group" header="群组" v-if="visibleList.group">
+    <a-collapse-panel key="group" header="Group" v-if="visibleList.group">
       <div class="contact-container" style="padding-top: 0">
         <div class="contact-list" v-for="(group, index) in groupList" :key="index">
           <div class="contact-box" @click="chooseObject(group)">

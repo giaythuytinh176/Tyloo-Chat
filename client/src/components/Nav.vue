@@ -29,7 +29,7 @@
       <a-icon type="bulb" class="tool-tip icon" />
     </a-tooltip>
     <!-- 消息列表/通讯录切换 -->
-    <a-tooltip placement="left" title="消息列表" arrow-point-at-center>
+    <a-tooltip placement="left" title="List messages" arrow-point-at-center>
       <a-icon
         type="wechat"
         theme="filled"
@@ -40,7 +40,7 @@
         @click="setActiveTabName('message')"
       />
     </a-tooltip>
-    <a-tooltip placement="left" theme="filled" title="通讯录" arrow-point-at-center>
+    <a-tooltip placement="left" theme="filled" title="Address book" arrow-point-at-center>
       <a-icon
         :class="{
           'tool-active': activeTabName === 'contacts',
@@ -53,7 +53,7 @@
     <a-icon type="skin" class="tool-skin icon" @click="showBackgroundModal = true" />
     <a v-if="isDemo" href="https://github.com/BoBoooooo/tyloo-chat" target="_blank" class="tool-github icon"><a-icon type="github" /></a>
     <a-icon class="tool-out icon" type="poweroff" @click="logout" />
-    <a-modal title="用户信息" :visible="showUserModal" footer="" @cancel="showUserModal = false">
+    <a-modal title="User Info" :visible="showUserModal" footer="" @cancel="showUserModal = false">
       <div class="tool-user">
         <div
           @mouseover="showUpload = true"
@@ -71,30 +71,30 @@
           <a-icon class="loading" v-if="uploading" type="loading" spin />
         </div>
         <div class="tool-user-info">
-          <div class="tool-user-title">更改用户名</div>
-          <a-input class="tool-user-input" v-model="username" placeholder="请输入新用户名"></a-input>
-          <a-button type="primary" @click="changeUserName">确认</a-button>
+          <div class="tool-user-tChange usernameitle">Change username:</div>
+          <a-input class="tool-user-input" v-model="username" placeholder="Please enter a new username"></a-input>
+          <a-button type="primary" @click="changeUserName">Confirm</a-button>
         </div>
         <div class="tool-user-info">
-          <div class="tool-user-title">更改密码</div>
-          <a-input-password class="tool-user-input" v-model="password" placeholder="请输入新密码"></a-input-password>
-          <a-button type="primary" @click="changePassword">确认</a-button>
+          <div class="tool-user-title">Change password:</div>
+          <a-input-password class="tool-user-input" v-model="password" placeholder="Please enter a new password"></a-input-password>
+          <a-button type="primary" @click="changePassword">Confirm</a-button>
         </div>
       </div>
     </a-modal>
-    <a-modal title="主题" :visible="showBackgroundModal" footer="" @cancel="showBackgroundModal = false">
+    <a-modal title="Theme" :visible="showBackgroundModal" footer="" @cancel="showBackgroundModal = false">
       <div class="tool-user-info">
         <div class="tool-user-title" style="width: 65px">
-          <span>背景图</span>
+          <span>Background image</span>
           <a-tooltip placement="topLeft" arrow-point-at-center>
             <div slot="title">
-              <span>输入空格时为默认背景, 支持 jpg, png, gif等格式</span>
+              <span>When entering a space, it is the default background, support jpg, png, gif and other formats</span>
             </div>
             <a-icon type="exclamation-circle" style="margin-left: 5px" />
           </a-tooltip>
         </div>
-        <a-input v-model="background" class="tool-user-input" placeholder="请输入背景图片网址"></a-input>
-        <a-button type="primary" @click="changeBackground">确认</a-button>
+        <a-input v-model="background" class="tool-user-input" placeholder="Please enter the background image URL"></a-input>
+        <a-button type="primary" @click="changeBackground">Confirm</a-button>
       </div>
       <div class="tool-recommend">
         <div class="recommend" v-for="(theme, index) in themes" :key="index" @click="setBackground(theme.url)">

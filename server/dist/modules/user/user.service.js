@@ -78,14 +78,14 @@ let UserService = class UserService {
                     username,
                 });
                 if (isHaveName) {
-                    return { code: 1, msg: '用户名重复', data: '' };
+                    return { code: 1, msg: 'Duplicate username', data: '' };
                 }
                 const newUser = await this.userRepository.findOne({
                     userId: oldUser.userId,
                 });
                 newUser.username = username;
                 await this.userRepository.update(oldUser.userId, newUser);
-                return { msg: '更新用户名成功', data: newUser };
+                return { msg: 'Username updated successfully', data: newUser };
             }
             return { code: rcode_1.RCode.FAIL, msg: '更新失败', data: '' };
         }
@@ -102,12 +102,12 @@ let UserService = class UserService {
                 const backUser = JSON.parse(JSON.stringify(newUser));
                 newUser.password = utils_1.md5(password);
                 await this.userRepository.update(user.userId, newUser);
-                return { msg: '更新用户密码成功', data: backUser };
+                return { msg: 'Updated password successfully', data: backUser };
             }
-            return { code: rcode_1.RCode.FAIL, msg: '更新失败', data: '' };
+            return { code: rcode_1.RCode.FAIL, msg: 'Update failed', data: '' };
         }
         catch (e) {
-            return { code: rcode_1.RCode.ERROR, msg: '更新用户密码失败', data: e };
+            return { code: rcode_1.RCode.ERROR, msg: 'Failed to update password', data: e };
         }
     }
     async delUser(user, did) {

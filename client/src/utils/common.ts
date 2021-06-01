@@ -88,7 +88,7 @@ export function nameVerify(name: string): boolean {
 export function passwordVerify(password: string): boolean {
   const passwordReg = /^\w+$/gis;
   if (password.length === 0) {
-    Vue.prototype.$message.error('请输入密码');
+    Vue.prototype.$message.error('Please enter password');
     return false;
   }
   if (!passwordReg.test(password)) {

@@ -26,7 +26,9 @@ __decorate([
     __metadata("design:type", String)
 ], Group.prototype, "groupName", void 0);
 __decorate([
-    typeorm_1.Column({ default: '群主很懒,没写公告' }),
+    typeorm_1.Column({
+        default: 'The group owner is very lazy and did not write an announcement'
+    }),
     __metadata("design:type", String)
 ], Group.prototype, "notice", void 0);
 __decorate([

@@ -106,12 +106,12 @@ let GroupService = class GroupService {
             await this.groupRepository.update(group.groupId, group);
             return {
                 code: rcode_1.RCode.OK,
-                msg: '修改成功',
+                msg: 'Successfully modified',
                 data: group,
             };
         }
         catch (e) {
-            return { code: rcode_1.RCode.ERROR, msg: '更新失败', data: null };
+            return { code: rcode_1.RCode.ERROR, msg: 'Update failed', data: null };
         }
     }
 };

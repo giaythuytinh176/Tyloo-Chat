@@ -18,7 +18,7 @@ import { join } from 'path';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: '170690',
+      password: 'root',
       database: 'test',
       charset: 'utf8mb4', // 设置chatset编码为utf8mb4
       autoLoadEntities: true,

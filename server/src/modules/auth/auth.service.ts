@@ -50,11 +50,15 @@ export class AuthService {
       });
     }
     if (!user) {
-      return { code: 1, msg: '用户名或密码错误', data: '' };
+      return {
+        code: 1,
+        msg: 'The username or password is incorrect',
+        data: '',
+      };
     }
     const payload = { userId: user.userId };
     return {
-      msg: '登录成功',
+      msg: 'Login successfully',
       data: {
         user: user,
         token: this.jwtService.sign(payload),
@@ -65,7 +69,7 @@ export class AuthService {
   async register(user: User): Promise<any> {
     const isHave = await this.userRepository.find({ username: user.username });
     if (isHave.length) {
-      return { code: RCode.FAIL, msg: '用户名重复', data: '' };
+      return { code: RCode.FAIL, msg: 'Duplicate username', data: '' };
     }
     user.avatar = `/avatar/avatar${Math.round(Math.random() * 19 + 1)}.png`;
     user.role = 'user';
@@ -92,7 +96,7 @@ export class AuthService {
       time: new Date().valueOf(),
     });
     return {
-      msg: '注册成功',
+      msg: 'Registered successfully',
       data: {
         user: newUser,
         token: this.jwtService.sign(payload),

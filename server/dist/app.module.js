@@ -29,7 +29,7 @@ AppModule = __decorate([
                 host: 'localhost',
                 port: 3306,
                 username: 'root',
-                password: '170690',
+                password: 'root',
                 database: 'test',
                 charset: 'utf8mb4',
                 autoLoadEntities: true,

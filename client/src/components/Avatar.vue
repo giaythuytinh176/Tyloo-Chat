@@ -26,8 +26,8 @@
           >
             删除用户
           </a-button>
-          <a-button @click="_setActiveRoom(data.userId)" type="primary" v-if="friendGather[data.userId]">发消息</a-button>
-          <a-button @click="addFriend(data.userId)" :loading="loading" type="primary" v-else>添加好友</a-button>
+          <a-button @click="_setActiveRoom(data.userId)" type="primary" v-if="friendGather[data.userId]">Send a message</a-button>
+          <a-button @click="addFriend(data.userId)" :loading="loading" type="primary" v-else>Add friend</a-button>
         </a-card>
       </div>
       <a-avatar

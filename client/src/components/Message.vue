@@ -36,7 +36,7 @@
         <template v-for="item in activeRoom.messages">
           <!-- 消息被撤回 -->
           <div class="message-content-revoke" v-if="item.isRevoke" :key="item.userId + item.time">
-            <span v-if="item.userId === user.userId"> 你撤回了一条消息 </span>
+            <span v-if="item.userId === user.userId"> You revoke a message </span>
             <span v-else> {{ item.revokeUserName }}撤回了一条消息 </span>
           </div>
           <!-- 正常消息 -->
@@ -69,8 +69,8 @@
               </div>
               <!-- 自定义右键菜单 -->
               <v-contextmenu :ref="'message' + item.userId + item.time">
-                <v-contextmenu-item v-if="item.messageType === 'text'" @click="handleCommand('COPY', item)">复制</v-contextmenu-item>
-                <v-contextmenu-item v-if="isShowRevoke(item)" @click="handleCommand('REVOKE', item)">撤回</v-contextmenu-item>
+                <v-contextmenu-item v-if="item.messageType === 'text'" @click="handleCommand('COPY', item)">Copy</v-contextmenu-item>
+                <v-contextmenu-item v-if="isShowRevoke(item)" @click="handleCommand('REVOKE', item)">Revoke</v-contextmenu-item>
               </v-contextmenu>
             </div>
           </div>
@@ -171,7 +171,7 @@ export default class Message extends Vue {
       window.addEventListener('copy', copy);
       document.execCommand('Copy');
       window.removeEventListener('copy', copy);
-      this.$message.info('已粘贴至剪切板');
+      this.$message.info('Pasted to clipboard');
       // eslint-disable-next-line no-undef
     } else if (type === 'REVOKE') {
       // 消息撤回功能

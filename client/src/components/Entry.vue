@@ -130,7 +130,7 @@ export default class Entry extends Vue {
     console.log(this.lastTime);
     console.log(nowTime);
     if (nowTime - this.lastTime < 200) {
-      return this.$message.error('消息发送太频繁！');
+      return this.$message.error('Messages are sent too frequently!');
     }
     fn(file);
     this.lastTime = nowTime;
@@ -141,11 +141,11 @@ export default class Entry extends Vue {
    */
   preSendMessage() {
     if (!this.text.trim()) {
-      this.$message.error('不能发送空消息!');
+      this.$message.error('Can not send empty message!');
       return;
     }
     if (this.text.length > 220) {
-      this.$message.error('消息太长!');
+      this.$message.error('Message is too long!');
       return;
     }
     console.log(this.text);

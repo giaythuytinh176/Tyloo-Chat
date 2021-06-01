@@ -16,11 +16,11 @@
       >
         <!-- 自定义右键菜单 -->
         <v-contextmenu :ref="'groupmenu' + chat.groupId">
-          <v-contextmenu-item v-if="chat.isTop === true" @click="handleCommand('TOP_REVERT', chat)">取消置顶</v-contextmenu-item>
-          <v-contextmenu-item v-else @click="handleCommand('TOP', chat)">置顶</v-contextmenu-item>
-          <v-contextmenu-item @click="handleCommand('READ', chat)">标记已读</v-contextmenu-item>
+          <v-contextmenu-item v-if="chat.isTop === true" @click="handleCommand('TOP_REVERT', chat)">Unpick</v-contextmenu-item>
+          <v-contextmenu-item v-else @click="handleCommand('TOP', chat)">Top</v-contextmenu-item>
+          <v-contextmenu-item @click="handleCommand('READ', chat)">Read</v-contextmenu-item>
           <v-contextmenu-item divider></v-contextmenu-item>
-          <v-contextmenu-item @click="handleCommand('DELETE', chat)">删除</v-contextmenu-item>
+          <v-contextmenu-item @click="handleCommand('DELETE', chat)">Delete</v-contextmenu-item>
         </v-contextmenu>
         <a-badge class="room-card-badge" dot v-if="unReadGather[chat.groupId]" />
         <img class="room-card-type" src="~@/assets/group.png" alt="" />
@@ -58,11 +58,11 @@
       >
         <!-- 自定义右键菜单 -->
         <v-contextmenu :ref="'contextmenu' + chat.userId">
-          <v-contextmenu-item v-if="chat.isTop === true" @click="handleCommand('TOP_REVERT', chat)">取消置顶</v-contextmenu-item>
-          <v-contextmenu-item v-else @click="handleCommand('TOP', chat)">置顶</v-contextmenu-item>
-          <v-contextmenu-item @click="handleCommand('READ', chat)">标记已读</v-contextmenu-item>
+          <v-contextmenu-item v-if="chat.isTop === true" @click="handleCommand('TOP_REVERT', chat)">Unpick</v-contextmenu-item>
+          <v-contextmenu-item v-else @click="handleCommand('TOP', chat)">Top</v-contextmenu-item>
+          <v-contextmenu-item @click="handleCommand('READ', chat)">Read</v-contextmenu-item>
           <v-contextmenu-item divider></v-contextmenu-item>
-          <v-contextmenu-item @click="handleCommand('DELETE', chat)">删除</v-contextmenu-item>
+          <v-contextmenu-item @click="handleCommand('DELETE', chat)">Delete</v-contextmenu-item>
         </v-contextmenu>
         <a-badge class="room-card-badge" :count="unReadGather[chat.userId]" />
         <img class="room-card-type" :src="apiUrl + friendGather[chat.userId].avatar" :class="{ offLine: avatarOffLine(chat) }" alt="" />
@@ -180,20 +180,20 @@ export default class Room extends Vue {
       }
       await this.$localforage.setItem(`${this.currentUserId}-topChatId`, chatId);
       await this.sortChat();
-      this.$message.success('置顶成功');
+      this.$message.success('Top successful');
     } else if (type === 'TOP_REVERT') {
       await this.$localforage.removeItem(`${this.currentUserId}-topChatId`);
       // 删除isTop属性,取消置顶
       // eslint-disable-next-line no-param-reassign
       delete chat.isTop;
       await this.sortChat();
-      this.$message.info('取消置顶');
+      this.$message.info('Unpick');
     } else if (type === 'READ') {
       this.lose_unread_gather(chatId);
     } else if (type === 'DELETE') {
       // 如果删除的是默认群组,不允许删除
       if (chat.groupId === 'group') {
-        this.$message.error('默认群组不允许删除');
+        this.$message.error('Default group is not allowed to be deleted');
         return;
       }
       // 如果聊天列表仅有一个消息不允许删除
@@ -211,10 +211,10 @@ export default class Room extends Vue {
         }
         // 删除聊天窗口后默认激活第一个聊天窗口
         await this.sortChat();
-        this.$message.success(`已删除${chat.groupName || chat.username}聊天窗口`);
+        this.$message.success(`Deleted ${chat.groupName || chat.username} chat window`);
         this.changeActiveRoom(this.chatArr[0] as User | Group);
       } else {
-        this.$message.error('无法删除');
+        this.$message.error('Can not delete');
       }
     }
   }

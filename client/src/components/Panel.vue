@@ -24,21 +24,21 @@
       >
         <div class="active-content">
           <div class="active-content-title">
-            <div class="active-content-title-label">群名</div>
+            <div class="active-content-title-label">Group name</div>
             <div>
               <span class="active-content-title-detail">{{ activeRoom.groupName }}</span>
               <a-icon v-if="currentUserIsManager" @click="showGroupNameDialog = true" type="edit" />
             </div>
-            <div class="active-content-title-label">群公告</div>
+            <div class="active-content-title-label">Group announcement</div>
             <div>
               <span class="active-content-title-detail">{{ activeRoom.notice }}</span>
               <a-icon @click="showGroupNoticeDialog = true" :type="currentUserIsManager ? 'edit' : 'eye'" />
             </div>
           </div>
-          <div class="active-content-sum">群人数: ({{ activeNum }}/{{ groupUsers.length }})</div>
+          <div class="active-content-sum">Group number: ({{ activeNum }}/{{ groupUsers.length }})</div>
           <div class="active-content-adduser" @click="showContactDialog">
             <a-icon class="icon" type="plus-square" />
-            <span class="label">添加成员</span>
+            <span class="label">Add member</span>
           </div>
           <div class="active-content-users">
             <div class="active-content-user" v-for="(data, index) in groupUsers" :key="data.userId + index">
@@ -49,7 +49,7 @@
               <a-icon class="icon" type="user" v-if="data.isManager === 1" />
             </div>
           </div>
-          <a-button type="danger" class="active-content-out" @click="exitGroup">退出群聊</a-button>
+          <a-button type="danger" class="active-content-out" @click="exitGroup">Exit group chat</a-button>
         </div>
       </a-drawer>
     </div>
@@ -60,14 +60,19 @@
       </a-popconfirm>
     </div>
     <!-- 修改群公告 -->
-    <a-modal v-if="activeRoom.notice" title="群公告" :visible="showGroupNoticeDialog" @cancel="() => (showGroupNoticeDialog = false)">
+    <a-modal
+      v-if="activeRoom.notice"
+      title="Group announcement"
+      :visible="showGroupNoticeDialog"
+      @cancel="() => (showGroupNoticeDialog = false)"
+    >
       <a-textarea v-if="currentUserIsManager" v-model="groupNotice"></a-textarea>
       <p v-else>
         {{ activeRoom.notice }}
       </p>
       <template #footer>
-        <a-button v-if="currentUserIsManager" type="primary" @click="handleUpdateGroupInfo"> 修改 </a-button>
-        <a-button @click="() => (showGroupNoticeDialog = false)">关闭</a-button>
+        <a-button v-if="currentUserIsManager" type="primary" @click="handleUpdateGroupInfo"> Confirm </a-button>
+        <a-button @click="() => (showGroupNoticeDialog = false)">Cancel</a-button>
       </template>
     </a-modal>
     <!-- 修改群名称 -->
@@ -186,7 +191,7 @@ export default class Panel extends Vue {
   // 更新群信息
   handleUpdateGroupInfo() {
     if (!this.groupNotice) {
-      this.$message.warning('请输入群公告');
+      this.$message.warning('Please enter a group announcement');
       return;
     }
     this.socket.emit('updateGroupInfo', {

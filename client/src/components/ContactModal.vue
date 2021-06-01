@@ -5,7 +5,7 @@
  * @Date: 2020-12-08 16:15:10
 -->
 <template>
-  <a-modal title="邀请好友加入本群" app :visible="showContactDialog" footer="" @cancel="cancelEvent">
+  <a-modal title="Invite friends to join this group" app :visible="showContactDialog" footer="" @cancel="cancelEvent">
     <a-transfer
       class="tree-transfer"
       :data-source="dataSource"
@@ -41,8 +41,8 @@
       </template>
       <template slot="footer" slot-scope="props">
         <template v-if="props.direction === 'right'">
-          <a-button type="primary" slot="footer" size="small" style="float: right; margin: 5px" @click="onSubmit"> 添加 </a-button>
-          <a-button slot="footer" size="small" style="float: right; margin: 5px" @click="showContactDialog = false"> 取消 </a-button>
+          <a-button type="primary" slot="footer" size="small" style="float: right; margin: 5px" @click="onSubmit"> Add </a-button>
+          <a-button slot="footer" size="small" style="float: right; margin: 5px" @click="showContactDialog = false"> Cancel </a-button>
         </template>
       </template>
     </a-transfer>

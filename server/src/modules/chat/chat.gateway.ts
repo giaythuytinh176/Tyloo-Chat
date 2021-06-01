@@ -59,7 +59,7 @@ export class ChatGateway {
     private readonly friendMessageRepository: Repository<FriendMessage>,
     private readonly authService: AuthService,
     private readonly groupService: GroupService,
-  ) {}
+  ) { }
 
   @WebSocketServer()
   server: Server;
@@ -115,7 +115,7 @@ export class ChatGateway {
       if (isHaveGroup) {
         this.server.to(data.userId).emit('addGroup', {
           code: RCode.FAIL,
-          msg: '该群名字已存在',
+          msg: 'The group name already exists',
           data: isHaveGroup,
         });
         return;
@@ -132,13 +132,13 @@ export class ChatGateway {
       data.members = [member];
       this.server.to(group.groupId).emit('addGroup', {
         code: RCode.OK,
-        msg: `成功创建群${data.groupName}`,
+        msg: `Group successfully created ${data.groupName}`,
         data: group,
       });
     } else {
       this.server
         .to(data.userId)
-        .emit('addGroup', { code: RCode.FAIL, msg: `你没资格创建群` });
+        .emit('addGroup', { code: RCode.FAIL, msg: `You are not qualified to create a group` });
     }
   }
 
@@ -239,9 +239,8 @@ export class ChatGateway {
         const saveName =
           data.messageType === 'image'
             ? `${Date.now()}$${data.userId}$${data.width}$${data.height}`
-            : `${Date.now()}$${data.userId}$${formatBytes(data.size)}$${
-                data.fileName
-              }`;
+            : `${Date.now()}$${data.userId}$${formatBytes(data.size)}$${data.fileName
+            }`;
         console.log(data.content);
         const stream = createWriteStream(join(SAVE_PATH, saveName));
         stream.write(data.content);
@@ -279,7 +278,7 @@ export class ChatGateway {
         if (data.userId === data.friendId) {
           this.server.to(data.userId).emit('addFriend', {
             code: RCode.FAIL,
-            msg: '不能添加自己为好友',
+            msg: 'Can not add myself as a friend',
             data: '',
           });
           return;
@@ -300,7 +299,7 @@ export class ChatGateway {
         if (relation1 || relation2) {
           this.server.to(data.userId).emit('addFriend', {
             code: RCode.FAIL,
-            msg: '已经有该好友',
+            msg: 'Already has this friend',
             data: data,
           });
           return;
@@ -335,7 +334,7 @@ export class ChatGateway {
           } else {
             this.server.to(data.userId).emit('addFriend', {
               code: RCode.FAIL,
-              msg: '该好友不存在',
+              msg: 'The friend does not exist',
               data: '',
             });
             return;
@@ -388,21 +387,21 @@ export class ChatGateway {
         friend.online = onlineUserIdArr.includes(friend.userId) ? 1 : 0;
         this.server.to(data.userId).emit('addFriend', {
           code: RCode.OK,
-          msg: `添加好友${friend.username}成功`,
+          msg: `Add friend ${friend.username} successful`,
           data: friend,
         });
         // 发起添加的人默认在线
         user.online = 1;
         this.server.to(data.friendId).emit('addFriend', {
           code: RCode.OK,
-          msg: `${user.username}添加你为好友`,
+          msg: `${user.username} Add you as a friend`,
           data: user,
         });
       }
     } else {
       this.server
         .to(data.userId)
-        .emit('addFriend', { code: RCode.FAIL, msg: '你没资格加好友' });
+        .emit('addFriend', { code: RCode.FAIL, msg: 'You are not qualified to be friends' });
     }
   }
 
@@ -458,9 +457,8 @@ export class ChatGateway {
           const saveName =
             data.messageType === 'image'
               ? `${Date.now()}$${data.userId}$${data.width}$${data.height}`
-              : `${Date.now()}$${data.userId}$${formatBytes(data.size)}$${
-                  data.fileName
-                }`;
+              : `${Date.now()}$${data.userId}$${formatBytes(data.size)}$${data.fileName
+              }`;
           console.log(data.content);
           const stream = createWriteStream(join(SAVE_PATH, saveName));
           stream.write(data.content);
@@ -483,7 +481,7 @@ export class ChatGateway {
     } else {
       this.server.to(data.userId).emit('friendMessage', {
         code: RCode.FAIL,
-        msg: '你没资格发消息',
+        msg: 'You are not qualified to send a message',
         data,
       });
     }
@@ -850,7 +848,10 @@ export class ChatGateway {
             // 广播所有被邀请者 (此处暂不判断该好友是否在线,统一广播,后期可优化)
             this.server.to(friendId).emit('joinGroup', {
               code: RCode.OK,
-              msg: isUser.username + '邀请您加入群聊' + group.groupName,
+              msg:
+                isUser.username +
+                'Invite you to join a group chat' +
+                group.groupName,
               data: res,
             });
           }
@@ -858,14 +859,14 @@ export class ChatGateway {
         console.log('inviteFriendsIntoGroup', res);
         this.server.to(group.groupId).emit('joinGroup', {
           code: RCode.OK,
-          msg: '邀请' + data.friendIds.length + '位好友加入群聊',
+          msg: 'Invite' + data.friendIds.length + 'Friends joined the group chat',
           data: res,
         });
       }
     } catch (error) {
       this.server.to(data.userId).emit('joinGroup', {
         code: RCode.FAIL,
-        msg: '邀请失败:' + error,
+        msg: 'Invitation failed:' + error,
         data: null,
       });
     }
