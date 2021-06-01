@@ -23,6 +23,9 @@ let WsJwtGuard = class WsJwtGuard {
         try {
             client = context.switchToWs().getClient();
             const authToken = (_b = (_a = client.handshake) === null || _a === void 0 ? void 0 : _a.query) === null || _b === void 0 ? void 0 : _b.token;
+            if (Array.isArray(authToken)) {
+                console.log('authToken', authToken);
+            }
             const user = this.authService.verifyUser(authToken);
             return Boolean(user);
         }

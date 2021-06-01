@@ -17,7 +17,11 @@ export class WsJwtGuard implements CanActivate {
     let client: Socket;
     try {
       client = context.switchToWs().getClient<Socket>();
-      const authToken: string = client.handshake?.query?.token;
+      // socket.io 2.4.1 authToken is String, but 4.1.2 may be array
+      const authToken: string | string[] = client.handshake?.query?.token;
+      if (Array.isArray(authToken)) {
+        console.log('authToken', authToken);
+      }
       const user = this.authService.verifyUser(authToken);
       return Boolean(user);
     } catch (err) {
