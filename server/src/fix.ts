@@ -6,7 +6,9 @@
  * @Date: 2020-11-30 16:04:32
  */
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const fs = require('fs');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
 
 module.exports = async () => {

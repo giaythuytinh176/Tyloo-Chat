@@ -7,6 +7,7 @@ import { ResponseInterceptor } from './common/interceptor/response.interceptor';
 import { join } from 'path';
 import { IoAdapter } from '@nestjs/platform-socket.io';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const fix_socket_io_bug = require('./fix');
 
 async function bootstrap() {
