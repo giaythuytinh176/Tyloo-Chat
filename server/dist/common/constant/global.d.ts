@@ -1,0 +1,9 @@
+export declare const defaultPassword = "123456";
+export declare const defaultRobot = "\u5C0F\u51B0\u673A\u5668\u4EBA";
+export declare const defaultRobotId = "robot";
+export declare const defaultWelcomeMessage = "\u6B22\u8FCE\u4F7F\u7528\u5C0F\u51B0\u673A\u5668\u4EBA,\u6709\u4EC0\u4E48\u80FD\u5E2E\u60A8\u7684\u5462?\uD83D\uDE03";
+export declare const defaultGroup = "\u7CFB\u7EDF\u95EE\u9898\u53CD\u9988\u7FA4";
+export declare const defaultGroupId = "group";
+export declare const IMAGE_SAVE_PATH = "public/static/image";
+export declare const FILE_SAVE_PATH = "public/static/file";
+export declare const defaultGroupMessageTime = 86400000;
