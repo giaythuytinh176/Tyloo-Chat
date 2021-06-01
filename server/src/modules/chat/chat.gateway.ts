@@ -401,7 +401,7 @@ export class ChatGateway {
     } else {
       this.server
         .to(data.userId)
-        .emit('addFriend', { code: RCode.FAIL, msg: 'You are not qualified to be friends' });
+        .emit('addFriend', { code: RCode.FAIL, msg: 'You are not qualified to be friend' });
     }
   }
 
@@ -489,7 +489,7 @@ export class ChatGateway {
 
   // 通过输入内容模糊匹配自动回复词条
   async getReplyMessage(content: string) {
-    const failMessage = '智能助手不知道你在说什么。';
+    const failMessage = 'The smart assistant does not know what you are talking about.';
     try {
       // 此处引用分词器进行中文分词
       // nodejieba
@@ -744,13 +744,13 @@ export class ChatGateway {
       await this.friendRepository.remove(map2);
       return this.server.to(userMap.userId).emit('exitFriend', {
         code: RCode.OK,
-        msg: '删好友成功',
+        msg: 'Successfully deleted friend',
         data: userMap,
       });
     }
     this.server
       .to(userMap.userId)
-      .emit('exitFriend', { code: RCode.FAIL, msg: '删好友失败' });
+      .emit('exitFriend', { code: RCode.FAIL, msg: 'Failed to delete friend' });
   }
 
   // 消息撤回
@@ -768,7 +768,7 @@ export class ChatGateway {
       await this.groupMessageRepository.remove(groupMessage);
       return this.server.to(messageDto.groupId).emit('revokeMessage', {
         code: RCode.OK,
-        msg: '已撤回了一条消息',
+        msg: 'A message has been revoked',
         data: messageDto,
       });
     } else {
@@ -779,11 +779,11 @@ export class ChatGateway {
         messageDto.userId > messageDto.friendId
           ? messageDto.userId + messageDto.friendId
           : messageDto.friendId + messageDto.userId;
-      console.log('消息撤回---' + messageDto._id);
+      console.log('Message revoke---' + messageDto._id);
       await this.friendMessageRepository.remove(friendMessage);
       return this.server.to(roomId).emit('revokeMessage', {
         code: RCode.OK,
-        msg: '已撤回了一条消息',
+        msg: 'A message has been revoked',
         data: messageDto,
       });
     }

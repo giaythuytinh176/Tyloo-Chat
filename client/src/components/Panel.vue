@@ -55,7 +55,7 @@
     </div>
     <!-- 删除好友,机器人默认不允许删除 -->
     <div v-else-if="!isRobot">
-      <a-popconfirm title="确定要删除该好友吗？" placement="bottomRight" ok-text="Yes" cancel-text="No" @confirm="exitFriend">
+      <a-popconfirm title="Are you sure you want to delete this friend?" placement="bottomRight" ok-text="Yes" cancel-text="No" @confirm="exitFriend">
         <a-icon type="more" style="transform: rotate(90deg)" class="active-button" />
       </a-popconfirm>
     </div>

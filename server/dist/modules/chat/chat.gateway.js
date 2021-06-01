@@ -312,7 +312,7 @@ let ChatGateway = class ChatGateway {
         else {
             this.server
                 .to(data.userId)
-                .emit('addFriend', { code: rcode_1.RCode.FAIL, msg: 'You are not qualified to be friends' });
+                .emit('addFriend', { code: rcode_1.RCode.FAIL, msg: 'You are not qualified to be friend' });
         }
     }
     async joinFriend(client, data) {
@@ -374,7 +374,7 @@ let ChatGateway = class ChatGateway {
         }
     }
     async getReplyMessage(content) {
-        const failMessage = '智能助手不知道你在说什么。';
+        const failMessage = 'The smart assistant does not know what you are talking about.';
         try {
             const splitWords = nodejieba.cut(content).join(' ');
             console.log(splitWords);
@@ -567,13 +567,13 @@ let ChatGateway = class ChatGateway {
             await this.friendRepository.remove(map2);
             return this.server.to(userMap.userId).emit('exitFriend', {
                 code: rcode_1.RCode.OK,
-                msg: '删好友成功',
+                msg: 'Successfully deleted friend',
                 data: userMap,
             });
         }
         this.server
             .to(userMap.userId)
-            .emit('exitFriend', { code: rcode_1.RCode.FAIL, msg: '删好友失败' });
+            .emit('exitFriend', { code: rcode_1.RCode.FAIL, msg: 'Failed to delete friend' });
     }
     async revokeMessage(client, messageDto) {
         if (messageDto.groupId) {
@@ -581,7 +581,7 @@ let ChatGateway = class ChatGateway {
             await this.groupMessageRepository.remove(groupMessage);
             return this.server.to(messageDto.groupId).emit('revokeMessage', {
                 code: rcode_1.RCode.OK,
-                msg: '已撤回了一条消息',
+                msg: 'A message has been revoked',
                 data: messageDto,
             });
         }
@@ -590,11 +590,11 @@ let ChatGateway = class ChatGateway {
             const roomId = messageDto.userId > messageDto.friendId
                 ? messageDto.userId + messageDto.friendId
                 : messageDto.friendId + messageDto.userId;
-            console.log('消息撤回---' + messageDto._id);
+            console.log('Message revoke---' + messageDto._id);
             await this.friendMessageRepository.remove(friendMessage);
             return this.server.to(roomId).emit('revokeMessage', {
                 code: rcode_1.RCode.OK,
-                msg: '已撤回了一条消息',
+                msg: 'A message has been revoked',
                 data: messageDto,
             });
         }

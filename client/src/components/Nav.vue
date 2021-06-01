@@ -65,7 +65,7 @@
           <a-upload v-if="showUpload && !uploading" class="tool-user-upload" :show-upload-list="false" :before-upload="beforeUpload">
             <div class="text">
               <a-icon type="upload" style="margin-right: 4px" />
-              <span>更换头像</span>
+              <span>Change avatar</span>
             </div>
           </a-upload>
           <a-icon class="loading" v-if="uploading" type="loading" spin />

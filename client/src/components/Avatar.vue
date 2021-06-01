@@ -24,7 +24,7 @@
             :loading="loading"
             type="primary"
           >
-            删除用户
+            Delete user
           </a-button>
           <a-button @click="_setActiveRoom(data.userId)" type="primary" v-if="friendGather[data.userId]">Send a message</a-button>
           <a-button @click="addFriend(data.userId)" :loading="loading" type="primary" v-else>Add friend</a-button>

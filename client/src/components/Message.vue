@@ -37,7 +37,7 @@
           <!-- 消息被撤回 -->
           <div class="message-content-revoke" v-if="item.isRevoke" :key="item.userId + item.time">
             <span v-if="item.userId === user.userId"> You revoke a message </span>
-            <span v-else> {{ item.revokeUserName }}撤回了一条消息 </span>
+            <span v-else> {{ item.revokeUserName }} Revoke a message </span>
           </div>
           <!-- 正常消息 -->
           <div v-else class="message-content-message" :key="item.userId + item.time" :class="{ 'text-right': item.userId === user.userId }">
