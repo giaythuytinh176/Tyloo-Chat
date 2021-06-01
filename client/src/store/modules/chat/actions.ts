@@ -219,7 +219,7 @@ const actions: ActionTree<ChatState, RootState> = {
       if (res.code) {
         return Vue.prototype.$message.error(res.msg);
       }
-      console.log(res);
+      console.log('res', res);
       dispatch('handleChatData', res.data);
       commit(SET_DROPPED, false);
     });
